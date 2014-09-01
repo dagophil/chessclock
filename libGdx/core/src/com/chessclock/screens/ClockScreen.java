@@ -2,7 +2,7 @@ package com.chessclock.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.chessclock.clocksession.ClockSession;
 
 public class ClockScreen implements Screen {
@@ -10,7 +10,7 @@ public class ClockScreen implements Screen {
 	private ClockSession m_session;
 	
 	public ClockScreen(float timePlayer1, float timePlayer2) {
-		m_session = new ClockSession(new FillViewport(240, 400), timePlayer1, timePlayer2);
+		m_session = new ClockSession(new FitViewport(240, 400), timePlayer1, timePlayer2);
 		Gdx.input.setInputProcessor(m_session);
 	}
 	

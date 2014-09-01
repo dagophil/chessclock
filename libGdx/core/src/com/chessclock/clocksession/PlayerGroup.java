@@ -1,6 +1,5 @@
 package com.chessclock.clocksession;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -35,7 +34,6 @@ public class PlayerGroup extends Group {
 		this.addListener(new InputListener() {
 			@Override
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-				Gdx.app.log("PlayerGroup", "touchDown");
 				PlayerGroup grp = (PlayerGroup) event.getListenerActor();
 				grp.clicked();
 				return true;
@@ -59,12 +57,10 @@ public class PlayerGroup extends Group {
 		this.addActor(m_labelGroup);
 		
 		// Create fonts
-		BitmapFont smallFont = new BitmapFont();
-		smallFont.setScale(1f);
+		BitmapFont smallFont = AssetLoader.getFont(1f);
 		LabelStyle smallLabelStyle = new LabelStyle();
 		smallLabelStyle.font = smallFont;
-		BitmapFont largeFont = new BitmapFont();
-		largeFont.setScale(3f);
+		BitmapFont largeFont = AssetLoader.getFont(3f);
 		LabelStyle largeLabelStyle = new LabelStyle();
 		largeLabelStyle.font = largeFont;
 		

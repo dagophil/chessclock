@@ -16,7 +16,7 @@ public class ClockSession extends Stage {
 	private PlayerGroup m_grpWhite;
 	private PlayerGroup m_grpBlack;
 	private Button m_btnPause;
-	private ResumeGroup m_grpResume;
+	private Overlay m_grpResume;
 	private boolean m_isPaused;
 	private float m_timePlayer1; // seconds
 	private float m_timePlayer2; // seconds
@@ -74,8 +74,15 @@ public class ClockSession extends Stage {
 		this.addActor(m_btnPause);
 		
 		// Create resume button
-		m_grpResume = new ResumeGroup(this);
-		m_grpResume.setVisible(false);
+		m_grpResume = new Overlay(this, "Click to resume");
+		m_grpResume.addListener(new InputListener() {
+			@Override
+			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+				ClockSession session = (ClockSession) event.getStage();
+				session.resume();
+				return false;
+			}
+		});
 		this.addActor(m_grpResume);
 	}
 	
@@ -85,12 +92,12 @@ public class ClockSession extends Stage {
 	
 	public void pause() {
 		m_isPaused = true;
-		m_grpResume.setVisible(true);
+		m_grpResume.show();
 	}
 	
 	public void resume() {
 		m_isPaused = false;
-		m_grpResume.setVisible(false);
+		m_grpResume.hide();
 	}
 	
 	public void update(float delta) {
