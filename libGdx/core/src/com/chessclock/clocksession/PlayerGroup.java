@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.utils.Scaling;
 import com.chessclock.helpers.AssetLoader;
+import com.chessclock.helpers.ClockTime;
 
 public class PlayerGroup extends Group {
 
@@ -34,8 +35,7 @@ public class PlayerGroup extends Group {
 		this.addListener(new InputListener() {
 			@Override
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-				PlayerGroup grp = (PlayerGroup) event.getListenerActor();
-				grp.clicked();
+				clicked();
 				return true;
 			}
 		});
@@ -68,13 +68,13 @@ public class PlayerGroup extends Group {
 		m_playerLabel = new Label("Your time:", smallLabelStyle);
 		m_playerLabel.setCenterPosition(this.getWidth()/2, this.getHeight()-50);
 		m_labelGroup.addActor(m_playerLabel);
-		m_playerTimeLabel = new Label(formatTime(getPlayerTime()), largeLabelStyle);
+		m_playerTimeLabel = new Label(ClockTime.format(getPlayerTime()), largeLabelStyle);
 		m_playerTimeLabel.setCenterPosition(this.getWidth()/2, this.getHeight()-80);
 		m_labelGroup.addActor(m_playerTimeLabel);
 		m_opponentLabel = new Label("Opponent's time:", smallLabelStyle);
 		m_opponentLabel.setCenterPosition(this.getWidth()/2, this.getHeight()-130);
 		m_labelGroup.addActor(m_opponentLabel);
-		m_opponentTimeLabel = new Label(formatTime(getOpponentTime()), largeLabelStyle);
+		m_opponentTimeLabel = new Label(ClockTime.format(getOpponentTime()), largeLabelStyle);
 		m_opponentTimeLabel.setCenterPosition(this.getWidth()/2, this.getHeight()-160);
 		m_labelGroup.addActor(m_opponentTimeLabel);
 	}
@@ -105,25 +105,13 @@ public class PlayerGroup extends Group {
 			session.changePlayers();
 		}
 	}
-
-	private String formatTime(float time) {
-		int deciseconds = (int) Math.ceil(time*10) % 10;
-		int seconds = (int) Math.floor(time) % 60;
-		int minutes = (int) Math.floor(time/60) % 60;
-		int hours = (int) Math.floor(time/3600);
-		if (hours > 0) {
-			return String.format("%02d:%02d:%02d", hours, minutes, seconds);
-		} else {
-			return String.format("%02d:%02d:%01d", minutes, seconds, deciseconds);
-		}
-	}
 	
 	@Override
 	public void act(float delta) {
 		if (isActive()) {
-			m_playerTimeLabel.setText(formatTime(getPlayerTime()));
+			m_playerTimeLabel.setText(ClockTime.format(getPlayerTime()));
 		} else {
-			m_opponentTimeLabel.setText(formatTime(getOpponentTime()));
+			m_opponentTimeLabel.setText(ClockTime.format(getOpponentTime()));
 		}
 		super.act(delta);
 	}

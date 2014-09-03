@@ -1,4 +1,4 @@
-package com.chessclock.clocksession;
+package com.chessclock.helpers;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -7,18 +7,17 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Scaling;
-import com.chessclock.helpers.AssetLoader;
 
 public class Overlay extends Image {
 
 	private String m_text;
 	
-	public Overlay(ClockSession session, String text) {
+	public Overlay(float width, float height, String text) {
 		super(AssetLoader.getDrawable(Color.BLACK), Scaling.stretch);
 		
 		m_text = text;
-		this.setWidth(session.getWidth());
-		this.setHeight(session.getHeight());
+		this.setWidth(width);
+		this.setHeight(height);
 		this.setColor(1f, 1f, 1f, 0.8f);
 		this.setVisible(false);
 	}

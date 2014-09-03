@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.chessclock.helpers.AssetLoader;
+import com.chessclock.helpers.Overlay;
 
 public class ClockSession extends Stage {
 	
@@ -59,27 +60,25 @@ public class ClockSession extends Stage {
 		ButtonStyle stylePause = new ButtonStyle();
 		stylePause.up = AssetLoader.getDrawable(Color.RED);
 		m_btnPause = new Button(stylePause);
-		m_btnPause.setWidth(this.getViewport().getWorldWidth()/5);
-		m_btnPause.setHeight(this.getViewport().getWorldWidth()/5);
-		m_btnPause.setX(2*this.getViewport().getWorldWidth()/5);
-		m_btnPause.setY(this.getViewport().getWorldHeight()/2-this.getViewport().getWorldWidth()/10);
+		m_btnPause.setWidth(this.getWidth()/5);
+		m_btnPause.setHeight(this.getWidth()/5);
+		m_btnPause.setX(2*this.getWidth()/5);
+		m_btnPause.setY(this.getHeight()/2-this.getWidth()/10);
 		m_btnPause.addListener(new InputListener() {
 			@Override
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-				ClockSession session = (ClockSession) event.getStage();
-				session.pause();
+				pause();
 				return true;
 			}
 		});
 		this.addActor(m_btnPause);
 		
 		// Create resume button
-		m_grpResume = new Overlay(this, "Click to resume");
+		m_grpResume = new Overlay(this.getWidth(), this.getHeight(), "Click to resume");
 		m_grpResume.addListener(new InputListener() {
 			@Override
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-				ClockSession session = (ClockSession) event.getStage();
-				session.resume();
+				resume();
 				return false;
 			}
 		});

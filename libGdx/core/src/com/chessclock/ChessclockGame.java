@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.chessclock.helpers.AssetLoader;
 import com.chessclock.screens.ClockScreen;
+import com.chessclock.screens.MenuScreen;
 
 
 public class ChessclockGame extends Game {
@@ -12,9 +13,12 @@ public class ChessclockGame extends Game {
 	public void create() {
 		Gdx.app.log("ChessclockGame", "created");
 		AssetLoader.load();
-		
-		// Default time: 90s
-		setScreen(new ClockScreen(90, 90));
+		setScreen(new MenuScreen(this));
+	}
+	
+	public void startClock(float timePlayer1, float timePlayer2) {
+		Gdx.app.log("ChessclockGame", "startClock called");
+		setScreen(new ClockScreen(timePlayer1, timePlayer2));
 	}
 	
 	@Override

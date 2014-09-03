@@ -48,6 +48,7 @@ public class ClockScreen implements Screen {
 
 	@Override
 	public void dispose() {
+		Gdx.app.log("ClockScreen", "dispose called");
 	}
 
 }
