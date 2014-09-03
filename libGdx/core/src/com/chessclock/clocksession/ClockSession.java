@@ -14,6 +14,9 @@ import com.chessclock.helpers.Overlay;
 
 public class ClockSession extends Stage {
 	
+	public static int DEFAULT_PAUSE_WIDTH = 50;
+	public static int DEFAULT_PAUSE_HEIGHT = 50;
+	
 	private PlayerGroup m_grpWhite;
 	private PlayerGroup m_grpBlack;
 	private Button m_btnPause;
@@ -60,10 +63,10 @@ public class ClockSession extends Stage {
 		ButtonStyle stylePause = new ButtonStyle();
 		stylePause.up = AssetLoader.getDrawable(Color.RED);
 		m_btnPause = new Button(stylePause);
-		m_btnPause.setWidth(this.getWidth()/5);
-		m_btnPause.setHeight(this.getWidth()/5);
-		m_btnPause.setX(2*this.getWidth()/5);
-		m_btnPause.setY(this.getHeight()/2-this.getWidth()/10);
+		m_btnPause.setWidth(DEFAULT_PAUSE_WIDTH);
+		m_btnPause.setHeight(DEFAULT_PAUSE_HEIGHT);
+		m_btnPause.setX((this.getWidth() - DEFAULT_PAUSE_WIDTH) / 2);
+		m_btnPause.setY((this.getHeight() - DEFAULT_PAUSE_HEIGHT) / 2);
 		m_btnPause.addListener(new InputListener() {
 			@Override
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {

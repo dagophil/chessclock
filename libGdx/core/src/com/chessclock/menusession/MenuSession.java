@@ -7,8 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.chessclock.ChessclockGame;
@@ -17,6 +15,8 @@ import com.chessclock.helpers.AssetLoader;
 public class MenuSession extends Stage {
 
 	public static final float DEFAULT_PLAYER_TIME = 90;
+	public static final float DEFAULT_X = 26;
+	public static final float DEFAULT_Y = 130;
 	private ChessclockGame m_game;
 	private Button m_btnStartClock;
 	private ClockInput m_player1Input;
@@ -47,14 +47,14 @@ public class MenuSession extends Stage {
 		
 		// TODO: Read default time from saved data.
 		m_player1Input = new ClockInput(DEFAULT_PLAYER_TIME);
-		m_player1Input.setX(26);
-		m_player1Input.setY(130);
+		m_player1Input.setX(DEFAULT_X);
+		m_player1Input.setY(DEFAULT_Y);
 		this.addActor(m_player1Input);
 		
 		// TODO: Read default time from saved data.
 		m_player2Input = new ClockInput(DEFAULT_PLAYER_TIME);
-		m_player2Input.setX(26);
-		m_player2Input.setY(130);
+		m_player2Input.setX(DEFAULT_X);
+		m_player2Input.setY(DEFAULT_Y);
 		m_player2Input.setVisible(false);
 		this.addActor(m_player2Input);
 	}
