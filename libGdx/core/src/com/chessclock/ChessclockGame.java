@@ -13,6 +13,7 @@ public class ChessclockGame extends Game {
 	public void create() {
 		Gdx.app.log("ChessclockGame", "created");
 		AssetLoader.load();
+		Gdx.input.setCatchBackKey(true);
 		setScreen(new MenuScreen(this));
 	}
 	
@@ -26,5 +27,6 @@ public class ChessclockGame extends Game {
 		super.dispose();
 		AssetLoader.dispose();
 	}
+	
 
 }

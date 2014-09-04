@@ -60,17 +60,6 @@ public class NumberInput extends Group {
 		m_btnMinus.setHeight(DEFAULT_BUTTON_HEIGHT);
 		m_btnMinus.setX((DEFAULT_LABEL_WIDTH - DEFAULT_BUTTON_WIDTH) / 2);
 		this.addActor(m_btnMinus);
-		
-		
-//		m_btnPause.addListener(new InputListener() {
-//			@Override
-//			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-//				pause();
-//				return true;
-//			}
-//		});
-//		this.addActor(m_btnPause);
-		
 	}
 	
 }
