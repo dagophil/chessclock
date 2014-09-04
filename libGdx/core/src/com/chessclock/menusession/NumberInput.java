@@ -1,8 +1,12 @@
 package com.chessclock.menusession;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -11,20 +15,27 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.chessclock.helpers.AssetLoader;
 
 public class NumberInput extends Group {
-
-	public static int DEFAULT_LABEL_WIDTH = 60;
-	public static int DEFAULT_LABEL_HEIGHT = 60;
-	public static int DEFAULT_BUTTON_WIDTH = 40;
-	public static int DEFAULT_BUTTON_HEIGHT = 30;
-	public static int DEFAULT_PAD = 2;
+	
+	public static int LABEL_WIDTH = 60;
+	public static int LABEL_HEIGHT = 60;
+	public static int BUTTON_WIDTH = 40;
+	public static int BUTTON_HEIGHT = 30;
+	public static int PADDING = 2;
+	public static float LONG_CLICK_TIME = 0.7f;
+	public static float SHORT_CLICK_TIME = 0.1f;
 	
 	private int m_number;
+	private int m_minValue;
+	private int m_maxValue;
 	private Label m_label;
 	private Button m_btnPlus;
 	private Button m_btnMinus;
 	
-	public NumberInput(int number) {
-		m_number = number;
+	public NumberInput(int startnumber, int minValue, int maxValue) {
+		m_number = startnumber;
+		m_minValue = minValue;
+		m_maxValue = maxValue;
+		checkNumber();
 		
 		// Create the font
 		BitmapFont font = AssetLoader.getFont(3f);
@@ -34,9 +45,9 @@ public class NumberInput extends Group {
 		
 		// Create the label
 		m_label = new Label(String.format("%02d", m_number), labelStyle);
-		m_label.setWidth(DEFAULT_LABEL_WIDTH);
-		m_label.setHeight(DEFAULT_LABEL_HEIGHT);
-		m_label.setY(DEFAULT_BUTTON_HEIGHT+DEFAULT_PAD);
+		m_label.setWidth(LABEL_WIDTH);
+		m_label.setHeight(LABEL_HEIGHT);
+		m_label.setY(BUTTON_HEIGHT+PADDING);
 		m_label.setAlignment(Align.center);
 		this.addActor(m_label);
 		
@@ -45,10 +56,23 @@ public class NumberInput extends Group {
 		btnPlusStyle.up = AssetLoader.getDrawable(Color.BLUE);
 		btnPlusStyle.down = AssetLoader.getDrawable(Color.valueOf("000099"));
 		m_btnPlus = new Button(btnPlusStyle);
-		m_btnPlus.setWidth(DEFAULT_BUTTON_WIDTH);
-		m_btnPlus.setHeight(DEFAULT_BUTTON_HEIGHT);
-		m_btnPlus.setX((DEFAULT_LABEL_WIDTH - DEFAULT_BUTTON_WIDTH) / 2);
-		m_btnPlus.setY(DEFAULT_LABEL_HEIGHT + DEFAULT_BUTTON_HEIGHT + 2 * DEFAULT_PAD);
+		m_btnPlus.setWidth(BUTTON_WIDTH);
+		m_btnPlus.setHeight(BUTTON_HEIGHT);
+		m_btnPlus.setX((LABEL_WIDTH - BUTTON_WIDTH) / 2);
+		m_btnPlus.setY(LABEL_HEIGHT + BUTTON_HEIGHT + 2 * PADDING);
+		m_btnPlus.addListener(new InputListener() {
+			@Override
+			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+				Gdx.app.log("NumberInput", "touch down");
+				startAdding(1, LONG_CLICK_TIME);
+				return true;
+			}
+			@Override
+			public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+				Gdx.app.log("NumberInput", "touch up");
+				clearActions();
+			}
+		});
 		this.addActor(m_btnPlus);
 		
 		// Create the minus button
@@ -56,10 +80,65 @@ public class NumberInput extends Group {
 		btnMinusStyle.up = AssetLoader.getDrawable(Color.BLUE);
 		btnMinusStyle.down = AssetLoader.getDrawable(Color.valueOf("000099"));
 		m_btnMinus = new Button(btnMinusStyle);
-		m_btnMinus.setWidth(DEFAULT_BUTTON_WIDTH);
-		m_btnMinus.setHeight(DEFAULT_BUTTON_HEIGHT);
-		m_btnMinus.setX((DEFAULT_LABEL_WIDTH - DEFAULT_BUTTON_WIDTH) / 2);
+		m_btnMinus.setWidth(BUTTON_WIDTH);
+		m_btnMinus.setHeight(BUTTON_HEIGHT);
+		m_btnMinus.setX((LABEL_WIDTH - BUTTON_WIDTH) / 2);
+		m_btnMinus.addListener(new InputListener() {
+			@Override
+			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+				startAdding(-1, LONG_CLICK_TIME);
+				return true;
+			}
+			@Override
+			public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+				clearActions();
+			}
+		});
 		this.addActor(m_btnMinus);
+	}
+
+	private class NumberAction extends TemporalAction {
+		int m_value;
+		public NumberAction(int value) {
+			m_value = value;
+			addToNumber(value);
+		}
+		@Override
+		protected void update(float percent) {}
+	}
+	
+	public void startAdding(int value, float duration) {
+		NumberAction longAddAction = new NumberAction(value) {
+			@Override
+			protected void end () {
+				startAdding(m_value, SHORT_CLICK_TIME);
+			}
+		};
+		longAddAction.setDuration(duration);
+		this.addAction(longAddAction);
+	}
+	
+	private void addToNumber(int value) {
+		m_number += value;
+		checkNumber();
+		m_label.setText(String.format("%02d", m_number));
+	}
+	
+	private void checkNumber() {
+		if (m_number > m_maxValue) {
+			m_number = m_minValue;
+		}
+		if (m_number < m_minValue) {
+			m_number = m_maxValue;
+		}
+	}
+	
+	public int getNumber() {
+		return m_number;
+	}
+	
+	public void setNumber(int number) {
+		m_number = number;
 	}
 	
 }

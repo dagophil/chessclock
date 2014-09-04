@@ -25,7 +25,6 @@ public class MenuSession extends Stage {
 	
 	public MenuSession(ChessclockGame game, Viewport viewport) {
 		super(viewport);
-		
 		m_game = game;
 		
 		// Create start button
@@ -61,7 +60,10 @@ public class MenuSession extends Stage {
 	}
 	
 	public void startClock() {
-		m_game.startClock(m_player1Input.getPlayerTime(), m_player2Input.getPlayerTime());
+		if (!m_player2Input.isVisible()) {
+			m_player2Input.setTime(m_player1Input.getTime());
+		}
+		m_game.startClock(m_player1Input.getTime(), m_player2Input.getTime());
 	}
 	
 	public void update(float delta) {
