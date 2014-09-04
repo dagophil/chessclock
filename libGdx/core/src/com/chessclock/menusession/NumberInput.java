@@ -35,7 +35,6 @@ public class NumberInput extends Group {
 		m_number = startnumber;
 		m_minValue = minValue;
 		m_maxValue = maxValue;
-		checkNumber();
 		
 		// Create the font
 		BitmapFont font = AssetLoader.getFont(3f);
@@ -120,8 +119,6 @@ public class NumberInput extends Group {
 	
 	private void addToNumber(int value) {
 		m_number += value;
-		checkNumber();
-		m_label.setText(String.format("%02d", m_number));
 	}
 	
 	private void checkNumber() {
@@ -139,6 +136,17 @@ public class NumberInput extends Group {
 	
 	public void setNumber(int number) {
 		m_number = number;
+	}
+	
+	private void updateLabel() {
+		m_label.setText(String.format("%02d", m_number));
+	}
+	
+	@Override
+	public void act(float delta) {
+		checkNumber();
+		updateLabel();
+		super.act(delta);
 	}
 	
 }
