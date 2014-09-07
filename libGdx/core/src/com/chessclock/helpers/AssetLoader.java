@@ -16,6 +16,7 @@ public class AssetLoader {
 	private static AssetManager m_am;
 	private static Skin m_skin;
 	private static BitmapFont m_font_small;
+	private static BitmapFont m_font_medium;
 	private static BitmapFont m_font_large;
 	
 	public static void load() {
@@ -26,8 +27,8 @@ public class AssetLoader {
 		pixmap.fill();
 		m_skin = new Skin();
 		m_skin.add("white", new Texture(pixmap));
-		m_font_small = new BitmapFont(Gdx.files.local("myfont1.fnt"));
-		m_font_small.setScale(0.5f);
+		m_font_small = new BitmapFont(Gdx.files.local("myfont20.fnt"));
+		m_font_medium = new BitmapFont(Gdx.files.local("myfont40.fnt"));
 		m_font_large = new BitmapFont(Gdx.files.local("myfont1.fnt"));
 		
 		m_am = new AssetManager();
@@ -42,23 +43,13 @@ public class AssetLoader {
 	public static TextureAtlas getButtons() {
 		return m_am.get("mybuttons.txt", TextureAtlas.class);
 	}
-	
-	/*
-	public static BitmapFont getFont(float scale) {
-		int i = (int) Math.round(scale*100);
-		if (m_fonts.containsKey(i)) {
-			return m_fonts.get(i);
-		} else {
-			BitmapFont font = new BitmapFont();
-			font.setScale(Math.round(scale*100)/100);
-			m_fonts.put(i, font);
-			return font;
-		}
-	}
-	*/
-	
+
 	public static BitmapFont getFontSmall() {
 		return m_font_small;
+	}
+	
+	public static BitmapFont getFontMedium() {
+		return m_font_medium;
 	}
 	
 	public static BitmapFont getFontLarge() {
@@ -69,6 +60,7 @@ public class AssetLoader {
 		Gdx.app.log("AssetLoader", "dispose called");
 		m_am.dispose();
 		m_font_small.dispose();
+		m_font_medium.dispose();
 		m_font_large.dispose();
 	}
 	

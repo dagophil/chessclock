@@ -1,24 +1,38 @@
 package com.chessclock.helpers;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 
-public class Overlay extends Image {
+public class Overlay extends Group {
 
-	private String m_text;
+	private Image m_background;
+	private Label m_label1;
 	
 	public Overlay(float width, float height, String text) {
-		super(AssetLoader.getDrawable(Color.BLACK), Scaling.stretch);
-		
-		m_text = text;
 		this.setWidth(width);
 		this.setHeight(height);
-		this.setColor(1f, 1f, 1f, 0.8f);
+		
+		m_background = new Image(AssetLoader.getDrawable(Color.BLACK), Scaling.stretch);
+		m_background.setWidth(width);
+		m_background.setHeight(height);
+		m_background.setColor(1f, 1f, 1f, 0.8f);
+		this.addActor(m_background);
+		
+		BitmapFont font = AssetLoader.getFontMedium();
+		LabelStyle labelStyle = new LabelStyle();
+		labelStyle.font = font;
+		
+		m_label1 = new Label(text, labelStyle);
+		m_label1.setAlignment(Align.center);
+		m_label1.setCenterPosition(this.getWidth()/2, this.getHeight()/2);
+		this.addActor(m_label1);
+		
 		this.setVisible(false);
 	}
 	
@@ -30,18 +44,8 @@ public class Overlay extends Image {
 		this.setVisible(false);
 	}
 	
-	@Override
-	public void draw(Batch batch, float parentAlpha) {
-		super.draw(batch, parentAlpha);
-		
-		// Draw the text on top
-		Matrix4 batchtransform = batch.getTransformMatrix();
-		Matrix4 rotTransform = new Matrix4();
-		rotTransform.setToRotation(new Vector3(0, 0, 1), 90);
-		batch.setTransformMatrix(rotTransform);
-		BitmapFont font = AssetLoader.getFontLarge();
-		font.draw(batch, m_text, this.getHeight()/2-150, -this.getWidth()/2+20);
-		batch.setTransformMatrix(batchtransform);
+	public void setText(String text) {
+		m_label1.setText(text);
 	}
-	
+
 }

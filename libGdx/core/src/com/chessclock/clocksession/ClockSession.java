@@ -77,8 +77,8 @@ public class ClockSession extends Stage {
 		});
 		this.addActor(m_btnPause);
 		
-		// Create resume button
-		m_grpResume = new Overlay(this.getWidth(), this.getHeight(), "Click to resume");
+		// Create resume overlay
+		m_grpResume = new Overlay(this.getWidth(), this.getHeight(), "Click to\nresume");
 		m_grpResume.addListener(new InputListener() {
 			@Override
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {

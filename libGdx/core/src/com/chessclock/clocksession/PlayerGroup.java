@@ -66,13 +66,13 @@ public class PlayerGroup extends Group {
 		
 		// Add labels
 		m_playerLabel = new Label("Your time:", smallLabelStyle);
-		m_playerLabel.setCenterPosition(this.getWidth()/2, this.getHeight()-50);
+		m_playerLabel.setCenterPosition(this.getWidth()/2, this.getHeight()-40);
 		m_labelGroup.addActor(m_playerLabel);
 		m_playerTimeLabel = new Label(ClockTime.format(getPlayerTime()), largeLabelStyle);
 		m_playerTimeLabel.setCenterPosition(this.getWidth()/2, this.getHeight()-80);
 		m_labelGroup.addActor(m_playerTimeLabel);
 		m_opponentLabel = new Label("Opponent's time:", smallLabelStyle);
-		m_opponentLabel.setCenterPosition(this.getWidth()/2, this.getHeight()-130);
+		m_opponentLabel.setCenterPosition(this.getWidth()/2, this.getHeight()-120);
 		m_labelGroup.addActor(m_opponentLabel);
 		m_opponentTimeLabel = new Label(ClockTime.format(getOpponentTime()), largeLabelStyle);
 		m_opponentTimeLabel.setCenterPosition(this.getWidth()/2, this.getHeight()-160);

@@ -1,4 +1,4 @@
-package com.chessclock.menusession;
+package com.chessclock.helpers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -12,11 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
-import com.chessclock.helpers.AssetLoader;
 
 public class NumberInput extends Group {
 	
-	public static int LABEL_WIDTH = 60;
+	public static int LABEL_WIDTH = 70;
 	public static int LABEL_HEIGHT = 60;
 	public static int BUTTON_WIDTH = 40;
 	public static int BUTTON_HEIGHT = 30;
@@ -37,7 +36,6 @@ public class NumberInput extends Group {
 		m_maxValue = maxValue;
 		
 		// Create the font
-		//BitmapFont font = AssetLoader.getFont(3f);
 		BitmapFont font = AssetLoader.getFontLarge();
 		LabelStyle labelStyle = new LabelStyle();
 		labelStyle.font = font;

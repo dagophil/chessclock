@@ -1,7 +1,6 @@
-package com.chessclock.menusession;
+package com.chessclock.helpers;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.chessclock.helpers.ClockTime;
 
 public class ClockInput extends Group {
 

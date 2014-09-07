@@ -13,11 +13,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.chessclock.ChessclockGame;
 import com.chessclock.helpers.AssetLoader;
+import com.chessclock.helpers.ClockInput;
 import com.chessclock.helpers.ClockPreferences;
 
 public class MenuSession extends Stage {
 
-	public static final float DEFAULT_X = 26;
+	public static final float DEFAULT_X = 10;
 	public static final float ONE_CLOCK_Y = 130;
 	public static final float TWO_CLOCKS_Y_PLAYER1 = 250;
 	public static final float TWO_CLOCKS_Y_PLAYER2 = 95;
