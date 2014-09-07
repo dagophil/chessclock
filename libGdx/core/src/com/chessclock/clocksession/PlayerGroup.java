@@ -57,10 +57,10 @@ public class PlayerGroup extends Group {
 		this.addActor(m_labelGroup);
 		
 		// Create fonts
-		BitmapFont smallFont = AssetLoader.getFont(1f);
+		BitmapFont smallFont = AssetLoader.getFontSmall();
 		LabelStyle smallLabelStyle = new LabelStyle();
 		smallLabelStyle.font = smallFont;
-		BitmapFont largeFont = AssetLoader.getFont(3f);
+		BitmapFont largeFont = AssetLoader.getFontLarge();
 		LabelStyle largeLabelStyle = new LabelStyle();
 		largeLabelStyle.font = largeFont;
 		

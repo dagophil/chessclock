@@ -37,7 +37,8 @@ public class NumberInput extends Group {
 		m_maxValue = maxValue;
 		
 		// Create the font
-		BitmapFont font = AssetLoader.getFont(3f);
+		//BitmapFont font = AssetLoader.getFont(3f);
+		BitmapFont font = AssetLoader.getFontLarge();
 		LabelStyle labelStyle = new LabelStyle();
 		labelStyle.font = font;
 		labelStyle.background = AssetLoader.getDrawable(Color.DARK_GRAY);

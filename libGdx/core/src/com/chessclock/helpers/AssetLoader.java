@@ -1,7 +1,5 @@
 package com.chessclock.helpers;
 
-import java.util.HashMap;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
@@ -17,7 +15,8 @@ public class AssetLoader {
 	
 	private static AssetManager m_am;
 	private static Skin m_skin;
-	private static HashMap<Integer, BitmapFont> m_fonts;
+	private static BitmapFont m_font_small;
+	private static BitmapFont m_font_large;
 	
 	public static void load() {
 		Gdx.app.log("AssetLoader", "load called");
@@ -27,12 +26,13 @@ public class AssetLoader {
 		pixmap.fill();
 		m_skin = new Skin();
 		m_skin.add("white", new Texture(pixmap));
+		m_font_small = new BitmapFont(Gdx.files.local("myfont1.fnt"));
+		m_font_small.setScale(0.5f);
+		m_font_large = new BitmapFont(Gdx.files.local("myfont1.fnt"));
 		
 		m_am = new AssetManager();
-		m_am.load("mybuttons.txt", TextureAtlas.class);
+		m_am.load("king.jpg", Texture.class);
 		m_am.finishLoading();
-		
-		m_fonts = new HashMap<Integer, BitmapFont>();
 	}
 	
 	public static Drawable getDrawable(Color color) {
@@ -40,9 +40,10 @@ public class AssetLoader {
 	}
 	
 	public static TextureAtlas getButtons() {
-		return m_am.get("mybuttons.txt");
+		return m_am.get("mybuttons.txt", TextureAtlas.class);
 	}
 	
+	/*
 	public static BitmapFont getFont(float scale) {
 		int i = (int) Math.round(scale*100);
 		if (m_fonts.containsKey(i)) {
@@ -54,13 +55,25 @@ public class AssetLoader {
 			return font;
 		}
 	}
+	*/
+	
+	public static BitmapFont getFontSmall() {
+		return m_font_small;
+	}
+	
+	public static BitmapFont getFontLarge() {
+		return m_font_large;
+	}
 	
 	public static void dispose() {
 		Gdx.app.log("AssetLoader", "dispose called");
 		m_am.dispose();
-		for (BitmapFont font : m_fonts.values()) {
-			font.dispose();
-		}
+		m_font_small.dispose();
+		m_font_large.dispose();
+	}
+	
+	public static Texture getBackgroundImage() {
+		return m_am.get("king.jpg", Texture.class);
 	}
 
 }

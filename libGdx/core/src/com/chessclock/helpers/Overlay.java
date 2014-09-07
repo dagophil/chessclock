@@ -39,7 +39,7 @@ public class Overlay extends Image {
 		Matrix4 rotTransform = new Matrix4();
 		rotTransform.setToRotation(new Vector3(0, 0, 1), 90);
 		batch.setTransformMatrix(rotTransform);
-		BitmapFont font = AssetLoader.getFont(3f);
+		BitmapFont font = AssetLoader.getFontLarge();
 		font.draw(batch, m_text, this.getHeight()/2-150, -this.getWidth()/2+20);
 		batch.setTransformMatrix(batchtransform);
 	}

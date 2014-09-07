@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.chessclock.ChessclockGame;
@@ -28,11 +29,18 @@ public class MenuSession extends Stage {
 	private Button m_btnTwoClocks;
 	private ClockInput m_player1Input;
 	private ClockInput m_player2Input;
+	private Image m_bgImage;
 	
 	public MenuSession(ChessclockGame game, Viewport viewport) {
 		super(viewport);
 		m_game = game;
-
+		
+		// Get the background image
+		m_bgImage = new Image(AssetLoader.getBackgroundImage());
+		m_bgImage.setWidth(this.getWidth());
+		m_bgImage.setHeight(this.getHeight());
+		this.addActor(m_bgImage);
+		
 		// Create start button
 		ButtonStyle styleStart = new ButtonStyle();
 		styleStart.up = AssetLoader.getDrawable(Color.GREEN);
