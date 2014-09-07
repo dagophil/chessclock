@@ -12,10 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.chessclock.ChessclockGame;
 import com.chessclock.helpers.AssetLoader;
+import com.chessclock.helpers.ClockPreferences;
 
 public class MenuSession extends Stage {
 
-	public static final float DEFAULT_PLAYER_TIME = 90;
 	public static final float DEFAULT_X = 26;
 	public static final float ONE_CLOCK_Y = 130;
 	public static final float TWO_CLOCKS_Y_PLAYER1 = 250;
@@ -32,7 +32,7 @@ public class MenuSession extends Stage {
 	public MenuSession(ChessclockGame game, Viewport viewport) {
 		super(viewport);
 		m_game = game;
-		
+
 		// Create start button
 		ButtonStyle styleStart = new ButtonStyle();
 		styleStart.up = AssetLoader.getDrawable(Color.GREEN);
@@ -67,33 +67,50 @@ public class MenuSession extends Stage {
 		});
 		this.addActor(m_btnTwoClocks);
 		
-		// TODO: Read default time from saved data.
-		m_player1Input = new ClockInput(DEFAULT_PLAYER_TIME);
+		// Create the player inputs
+		m_player1Input = new ClockInput(ClockPreferences.getPlayer1Time());
 		m_player1Input.setX(DEFAULT_X);
-		m_player1Input.setY(ONE_CLOCK_Y);
 		this.addActor(m_player1Input);
-		
-		// TODO: Read default time from saved data.
-		m_player2Input = new ClockInput(DEFAULT_PLAYER_TIME);
+		m_player2Input = new ClockInput(ClockPreferences.getPlayer2Time());
 		m_player2Input.setX(DEFAULT_X);
-		m_player2Input.setY(ONE_CLOCK_Y);
-		m_player2Input.setVisible(false);
 		this.addActor(m_player2Input);
+		if (ClockPreferences.getTwoClocks()) {
+			setToTwoClocks();
+		} else {
+			setToOneClock();
+		}
+	}
+	
+	private void setToOneClock() {
+		m_player2Input.setVisible(false);
+		m_player1Input.setY(ONE_CLOCK_Y);
+	}
+	
+	private void setToTwoClocks() {
+		m_player2Input.setVisible(true);
+		m_player1Input.setY(TWO_CLOCKS_Y_PLAYER1);
+		m_player2Input.setY(TWO_CLOCKS_Y_PLAYER2);
 	}
 	
 	public void toggleTwoClocks() {
 		if (m_player2Input.isVisible()) {
-			m_player2Input.setVisible(false);
-			m_player1Input.setY(ONE_CLOCK_Y);
+			setToOneClock();
 		} else {
 			m_player2Input.setTime(m_player1Input.getTime());
-			m_player2Input.setVisible(true);
-			m_player1Input.setY(TWO_CLOCKS_Y_PLAYER1);
-			m_player2Input.setY(TWO_CLOCKS_Y_PLAYER2);
+			setToTwoClocks();
 		}
 	}
 	
+	private void savePrefs() {
+		Gdx.app.log("MenuSession", "saving prefs");
+		ClockPreferences.setPlayer1Time(m_player1Input.getTime());
+		ClockPreferences.setPlayer2Time(m_player2Input.getTime());
+		ClockPreferences.setTwoClocks(m_player2Input.isVisible());
+		ClockPreferences.flush();
+	}
+	
 	public void startClock() {
+		savePrefs();
 		if (!m_player2Input.isVisible()) {
 			m_player2Input.setTime(m_player1Input.getTime());
 		}
