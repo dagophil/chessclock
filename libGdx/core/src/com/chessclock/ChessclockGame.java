@@ -8,13 +8,18 @@ import com.chessclock.screens.MenuScreen;
 
 
 public class ChessclockGame extends Game {
-
+	
+	private boolean m_assetsLoaded;
+	
 	@Override
 	public void create() {
 		Gdx.app.log("ChessclockGame", "created");
-		AssetLoader.load();
 		Gdx.input.setCatchBackKey(true);
-		setScreen(new MenuScreen(this));
+		
+		// TODO: Show loading screen here.
+		
+		m_assetsLoaded = false;
+		AssetLoader.load();
 	}
 	
 	public void startClock(float timePlayer1, float timePlayer2) {
@@ -23,10 +28,19 @@ public class ChessclockGame extends Game {
 	}
 	
 	@Override
+	public void render () {
+		if (!m_assetsLoaded && AssetLoader.update()) {
+			Gdx.app.log("ChessclockGame", "assets loaded");
+			m_assetsLoaded = true;
+			setScreen(new MenuScreen(this));
+		}
+		super.render();
+	}
+	
+	@Override
 	public void dispose() {
 		super.dispose();
 		AssetLoader.dispose();
 	}
 	
-
 }
