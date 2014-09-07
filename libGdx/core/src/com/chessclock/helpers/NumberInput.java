@@ -39,7 +39,6 @@ public class NumberInput extends Group {
 		BitmapFont font = AssetLoader.getFontLarge();
 		LabelStyle labelStyle = new LabelStyle();
 		labelStyle.font = font;
-		labelStyle.background = AssetLoader.getDrawable(Color.DARK_GRAY);
 		
 		// Create the label
 		m_label = new Label(String.format("%02d", m_number), labelStyle);

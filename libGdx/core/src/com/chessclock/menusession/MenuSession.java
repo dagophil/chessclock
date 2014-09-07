@@ -17,7 +17,7 @@ import com.chessclock.helpers.ClockPreferences;
 
 public class MenuSession extends Stage {
 
-	public static final float DEFAULT_X = 10;
+	public static final float DEFAULT_X = 6;
 	public static final float ONE_CLOCK_Y = 130;
 	public static final float TWO_CLOCKS_Y_PLAYER1 = 250;
 	public static final float TWO_CLOCKS_Y_PLAYER2 = 95;

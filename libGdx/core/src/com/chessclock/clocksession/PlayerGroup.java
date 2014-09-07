@@ -7,11 +7,15 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.chessclock.helpers.AssetLoader;
 import com.chessclock.helpers.ClockTime;
 
 public class PlayerGroup extends Group {
+	
+	public static String YOUR_TIME_TEXT = "Your time:";
+	public static String HIS_TIME_TEXT = "Opponent's time:";
 
 	private Group m_labelGroup;
 	private Label m_playerLabel;
@@ -65,17 +69,28 @@ public class PlayerGroup extends Group {
 		largeLabelStyle.font = largeFont;
 		
 		// Add labels
-		m_playerLabel = new Label("Your time:", smallLabelStyle);
-		m_playerLabel.setCenterPosition(this.getWidth()/2, this.getHeight()-40);
+		m_playerLabel = new Label(YOUR_TIME_TEXT, smallLabelStyle);
+		m_playerLabel.setWidth(this.getWidth());
+		m_playerLabel.setY(145);
+		m_playerLabel.setAlignment(Align.center);
 		m_labelGroup.addActor(m_playerLabel);
+		
 		m_playerTimeLabel = new Label(ClockTime.format(getPlayerTime()), largeLabelStyle);
-		m_playerTimeLabel.setCenterPosition(this.getWidth()/2, this.getHeight()-80);
+		m_playerTimeLabel.setWidth(this.getWidth());
+		m_playerTimeLabel.setY(83);
+		m_playerTimeLabel.setAlignment(Align.center);
 		m_labelGroup.addActor(m_playerTimeLabel);
-		m_opponentLabel = new Label("Opponent's time:", smallLabelStyle);
-		m_opponentLabel.setCenterPosition(this.getWidth()/2, this.getHeight()-120);
+		
+		m_opponentLabel = new Label(HIS_TIME_TEXT, smallLabelStyle);
+		m_opponentLabel.setWidth(this.getWidth());
+		m_opponentLabel.setY(62);
+		m_opponentLabel.setAlignment(Align.center);
 		m_labelGroup.addActor(m_opponentLabel);
+		
 		m_opponentTimeLabel = new Label(ClockTime.format(getOpponentTime()), largeLabelStyle);
-		m_opponentTimeLabel.setCenterPosition(this.getWidth()/2, this.getHeight()-160);
+		m_opponentTimeLabel.setWidth(this.getWidth());
+		m_opponentTimeLabel.setY(0);
+		m_opponentTimeLabel.setAlignment(Align.center);
 		m_labelGroup.addActor(m_opponentTimeLabel);
 	}
 	

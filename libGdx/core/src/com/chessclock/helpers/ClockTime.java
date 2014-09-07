@@ -24,9 +24,9 @@ public class ClockTime {
 		int minutes = getMinutes(time);
 		int hours = getHours(time);
 		if (hours > 0) {
-			return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+			return String.format("%d:%02d:%02d", hours, minutes, seconds);
 		} else {
-			return String.format("%02d:%02d:%01d", minutes, seconds, deciseconds);
+			return String.format("%d:%02d:%01d", minutes, seconds, deciseconds);
 		}
 	}
 	
