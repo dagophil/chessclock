@@ -4,14 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.chessclock.ChessclockGame;
-import com.chessclock.menusession.MenuSession;
+import com.chessclock.aboutsession.AboutSession;
 
-public class MenuScreen implements Screen {
+public class AboutScreen implements Screen {
 
-	private MenuSession m_session;
+	private AboutSession m_session;
 	
-	public MenuScreen(ChessclockGame game, boolean fadeIn) {
-		m_session = new MenuSession(game, new FitViewport(240, 400), fadeIn);
+	public AboutScreen(ChessclockGame game) {
+		m_session = new AboutSession(game, new FitViewport(240, 400));
 		Gdx.input.setInputProcessor(m_session);
 	}
 	
@@ -23,33 +23,38 @@ public class MenuScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		Gdx.app.log("MenuScreen", "resizing");
-		m_session.getViewport().update(width, height);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void show() {
-		Gdx.app.log("MenuScreen", "show called");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void hide() {
-		Gdx.app.log("MenuScreen", "hide called");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void pause() {
-		Gdx.app.log("MenuScreen", "pause called");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void resume() {
-		Gdx.app.log("MenuScreen", "resume called");
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void dispose() {
-		Gdx.app.log("MenuScreen", "dispose called");
+		// TODO Auto-generated method stub
+		
 	}
 
 }

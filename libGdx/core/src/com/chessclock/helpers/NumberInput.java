@@ -1,8 +1,9 @@
 package com.chessclock.helpers;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -12,13 +13,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class NumberInput extends Group {
 	
 	public static int LABEL_WIDTH = 70;
 	public static int LABEL_HEIGHT = 60;
-	public static int BUTTON_WIDTH = 40;
-	public static int BUTTON_HEIGHT = 30;
+	public static int BUTTON_WIDTH = 34;
+	public static int BUTTON_HEIGHT = 22;
 	public static int PADDING = 2;
 	public static float LONG_CLICK_TIME = 0.7f;
 	public static float SHORT_CLICK_TIME = 0.1f;
@@ -50,8 +52,8 @@ public class NumberInput extends Group {
 		
 		// Create the plus button
 		ButtonStyle btnPlusStyle = new ButtonStyle();
-		btnPlusStyle.up = AssetLoader.getDrawable(Color.BLUE);
-		btnPlusStyle.down = AssetLoader.getDrawable(Color.valueOf("000099"));
+		btnPlusStyle.up = new TextureRegionDrawable(new TextureRegion(AssetLoader.get(AssetLoader.BTN_ARR_UP, Texture.class)));
+		btnPlusStyle.down = new TextureRegionDrawable(new TextureRegion(AssetLoader.get(AssetLoader.BTN_ARR_UP_DOWN, Texture.class)));
 		m_btnPlus = new Button(btnPlusStyle);
 		m_btnPlus.setWidth(BUTTON_WIDTH);
 		m_btnPlus.setHeight(BUTTON_HEIGHT);
@@ -74,8 +76,8 @@ public class NumberInput extends Group {
 		
 		// Create the minus button
 		ButtonStyle btnMinusStyle = new ButtonStyle();
-		btnMinusStyle.up = AssetLoader.getDrawable(Color.BLUE);
-		btnMinusStyle.down = AssetLoader.getDrawable(Color.valueOf("000099"));
+		btnMinusStyle.up = new TextureRegionDrawable(new TextureRegion(AssetLoader.get(AssetLoader.BTN_ARR_DOWN, Texture.class)));
+		btnMinusStyle.down = new TextureRegionDrawable(new TextureRegion(AssetLoader.get(AssetLoader.BTN_ARR_DOWN_DOWN, Texture.class)));
 		m_btnMinus = new Button(btnMinusStyle);
 		m_btnMinus.setWidth(BUTTON_WIDTH);
 		m_btnMinus.setHeight(BUTTON_HEIGHT);

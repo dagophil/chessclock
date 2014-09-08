@@ -24,7 +24,7 @@ public class Overlay extends Group {
 		m_background.setColor(1f, 1f, 1f, 0.8f);
 		this.addActor(m_background);
 		
-		BitmapFont font = AssetLoader.getFontMedium();
+		BitmapFont font = AssetLoader.getFontSM();
 		LabelStyle labelStyle = new LabelStyle();
 		labelStyle.font = font;
 		
@@ -38,6 +38,7 @@ public class Overlay extends Group {
 	
 	public void show() {
 		this.setVisible(true);
+		this.setColor(1f, 1f, 1f, 1f);
 	}
 	
 	public void hide() {
