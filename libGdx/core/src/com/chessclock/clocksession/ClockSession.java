@@ -1,12 +1,14 @@
 package com.chessclock.clocksession;
 
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.chessclock.helpers.AssetLoader;
 import com.chessclock.helpers.Overlay;
@@ -61,7 +63,7 @@ public class ClockSession extends Stage {
 		
 		// Create pause button
 		ButtonStyle stylePause = new ButtonStyle();
-		stylePause.up = AssetLoader.getDrawable(Color.RED);
+		stylePause.up = new TextureRegionDrawable(new TextureRegion(AssetLoader.get(AssetLoader.BTN_PAUSE, Texture.class)));
 		m_btnPause = new Button(stylePause);
 		m_btnPause.setWidth(DEFAULT_PAUSE_WIDTH);
 		m_btnPause.setHeight(DEFAULT_PAUSE_HEIGHT);

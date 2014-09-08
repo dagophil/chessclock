@@ -2,13 +2,15 @@ package com.chessclock.menusession;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.chessclock.ChessclockGame;
 import com.chessclock.helpers.AssetLoader;
@@ -30,21 +32,31 @@ public class MenuSession extends Stage {
 	private ClockInput m_player1Input;
 	private ClockInput m_player2Input;
 	private Image m_bgImage;
+	private ButtonStyle m_styleOneClock;
+	private ButtonStyle m_styleTwoClocks;
 	
 	public MenuSession(ChessclockGame game, Viewport viewport) {
 		super(viewport);
 		m_game = game;
 		
 		// Get the background image
-		m_bgImage = new Image(AssetLoader.getBackgroundImage());
+		m_bgImage = new Image(AssetLoader.get(AssetLoader.KING, Texture.class));
 		m_bgImage.setWidth(this.getWidth());
 		m_bgImage.setHeight(this.getHeight());
 		this.addActor(m_bgImage);
 		
+		// Create the button styles for the two clock button
+		m_styleOneClock = new ButtonStyle();
+		m_styleOneClock.up = new TextureRegionDrawable(new TextureRegion(AssetLoader.get(AssetLoader.BTN_ONE_CLOCK, Texture.class)));
+		m_styleOneClock.down = new TextureRegionDrawable(new TextureRegion(AssetLoader.get(AssetLoader.BTN_ONE_CLOCK_DOWN, Texture.class)));
+		m_styleTwoClocks = new ButtonStyle();
+		m_styleTwoClocks.up = new TextureRegionDrawable(new TextureRegion(AssetLoader.get(AssetLoader.BTN_TWO_CLOCKS, Texture.class)));
+		m_styleTwoClocks.down = new TextureRegionDrawable(new TextureRegion(AssetLoader.get(AssetLoader.BTN_TWO_CLOCKS_DOWN, Texture.class)));
+		
 		// Create start button
 		ButtonStyle styleStart = new ButtonStyle();
-		styleStart.up = AssetLoader.getDrawable(Color.GREEN);
-		styleStart.down = AssetLoader.getDrawable(Color.valueOf("009900"));
+		styleStart.up = new TextureRegionDrawable(new TextureRegion(AssetLoader.get(AssetLoader.BTN_GO, Texture.class)));
+		styleStart.down = new TextureRegionDrawable(new TextureRegion(AssetLoader.get(AssetLoader.BTN_GO_DOWN, Texture.class)));
 		m_btnStartClock = new Button(styleStart);
 		m_btnStartClock.setWidth(BTN_WIDTH);
 		m_btnStartClock.setHeight(BTN_HEIGHT);
@@ -59,10 +71,7 @@ public class MenuSession extends Stage {
 		this.addActor(m_btnStartClock);
 		
 		// Create a button to toggle one clock / two clocks
-		ButtonStyle styleTwoClocks = new ButtonStyle();
-		styleTwoClocks.up = AssetLoader.getDrawable(Color.BLUE);
-		styleTwoClocks.down = AssetLoader.getDrawable(Color.valueOf("000099"));
-		m_btnTwoClocks = new Button(styleTwoClocks);
+		m_btnTwoClocks = new Button(m_styleTwoClocks);
 		m_btnTwoClocks.setWidth(BTN_WIDTH);
 		m_btnTwoClocks.setHeight(BTN_HEIGHT);
 		m_btnTwoClocks.setX(15);
@@ -92,12 +101,14 @@ public class MenuSession extends Stage {
 	private void setToOneClock() {
 		m_player2Input.setVisible(false);
 		m_player1Input.setY(ONE_CLOCK_Y);
+		m_btnTwoClocks.setStyle(m_styleTwoClocks);
 	}
 	
 	private void setToTwoClocks() {
 		m_player2Input.setVisible(true);
 		m_player1Input.setY(TWO_CLOCKS_Y_PLAYER1);
 		m_player2Input.setY(TWO_CLOCKS_Y_PLAYER2);
+		m_btnTwoClocks.setStyle(m_styleOneClock);
 	}
 	
 	public void toggleTwoClocks() {
