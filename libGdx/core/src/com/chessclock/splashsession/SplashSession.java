@@ -34,7 +34,7 @@ public class SplashSession extends Stage {
 		AlphaAction fadeIn = new AlphaAction();
 		fadeIn.setAlpha(1f);
 		fadeIn.setDuration(1f);
-		DelayAction waitAction = new DelayAction(3f);
+		DelayAction waitAction = new DelayAction(1f);
 		SequenceAction seq = new SequenceAction(fadeIn, waitAction);
 
 		m_bgImage.addAction(seq);

@@ -34,11 +34,11 @@ public class ClockInput extends Group {
 		labelStyle.font = font;
 		
 		m_label1 = new Label(":", labelStyle);
-		m_label1.moveBy(3 + NUMBER_WIDTH, 17);
+		m_label1.moveBy(3 + NUMBER_WIDTH, 27);
 		this.addActor(m_label1);
 		
 		m_label2 = new Label(":", labelStyle);
-		m_label2.moveBy(3 + 2 * (NUMBER_WIDTH + INPUT_PAD), 17);
+		m_label2.moveBy(3 + 2 * (NUMBER_WIDTH + INPUT_PAD), 27);
 		this.addActor(m_label2);
 	}
 	

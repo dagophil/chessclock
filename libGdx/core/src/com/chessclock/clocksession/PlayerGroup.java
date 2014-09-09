@@ -64,6 +64,9 @@ public class PlayerGroup extends Group {
 		BitmapFont smallFont = AssetLoader.getFontSmall();
 		LabelStyle smallLabelStyle = new LabelStyle();
 		smallLabelStyle.font = smallFont;
+		BitmapFont mediumFont = AssetLoader.getFontMedium();
+		LabelStyle mediumLabelStyle = new LabelStyle();
+		mediumLabelStyle.font = mediumFont;
 		BitmapFont largeFont = AssetLoader.getFontLarge();
 		LabelStyle largeLabelStyle = new LabelStyle();
 		largeLabelStyle.font = largeFont;
@@ -77,7 +80,7 @@ public class PlayerGroup extends Group {
 		
 		m_playerTimeLabel = new Label(ClockTime.format(getPlayerTime()), largeLabelStyle);
 		m_playerTimeLabel.setWidth(this.getWidth());
-		m_playerTimeLabel.setY(83);
+		m_playerTimeLabel.setY(95);
 		m_playerTimeLabel.setAlignment(Align.center);
 		m_labelGroup.addActor(m_playerTimeLabel);
 		
@@ -87,9 +90,9 @@ public class PlayerGroup extends Group {
 		m_opponentLabel.setAlignment(Align.center);
 		m_labelGroup.addActor(m_opponentLabel);
 		
-		m_opponentTimeLabel = new Label(ClockTime.format(getOpponentTime()), largeLabelStyle);
+		m_opponentTimeLabel = new Label(ClockTime.format(getOpponentTime()), mediumLabelStyle);
 		m_opponentTimeLabel.setWidth(this.getWidth());
-		m_opponentTimeLabel.setY(0);
+		m_opponentTimeLabel.setY(12);
 		m_opponentTimeLabel.setAlignment(Align.center);
 		m_labelGroup.addActor(m_opponentTimeLabel);
 	}

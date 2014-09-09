@@ -1,5 +1,7 @@
 package com.chessclock.helpers;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
@@ -7,37 +9,72 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.utils.Array;
 
 public class AssetLoader {
 	
+	public static String FONT20 = "fonts/myfont60.fnt";
+	public static String FONT30 = "fonts/myfont80.fnt";
+	public static String FONT40 = "fonts/myfont100.fnt";
+	public static String FONT60 = "fonts/myfont120.fnt";
 	public static String KING = "king.jpg";
-	public static String FONT20 = "myfont20.fnt";
-	public static String FONT30 = "myfont30.fnt";
-	public static String FONT40 = "myfont40.fnt";
-	public static String FONT60 = "myfont1.fnt";
-	public static String BTN_GO = "btn_go_50.png";
-	public static String BTN_GO_DOWN = "btn_go_down_50.png";
-	public static String BTN_ONE_CLOCK = "btn_one_clock_50.png";
-	public static String BTN_ONE_CLOCK_DOWN = "btn_one_clock_down_50.png";
-	public static String BTN_TWO_CLOCKS = "btn_two_clocks_50.png";
-	public static String BTN_TWO_CLOCKS_DOWN = "btn_two_clocks_down_50.png";
-	public static String BTN_PAUSE = "btn_pause_50.png";
-	public static String BTN_PAUSE_DOWN = "btn_pause_down_50.png";
-	public static String BTN_ARR_UP = "btn_up.png";
-	public static String BTN_ARR_UP_DOWN = "btn_up_down.png";
-	public static String BTN_ARR_DOWN = "btn_down.png";
-	public static String BTN_ARR_DOWN_DOWN = "btn_down_down.png";
-	public static String BTN_DEV_UP = "btn_dev_50.png";
-	public static String BTN_DEV_DOWN = "btn_dev_down_50.png";
-	public static String BTN_BACK_UP = "btn_back_50.png";
-	public static String BTN_BACK_DOWN = "btn_back_down_50.png";
+	public static String BTN_GO = "btn_go_320.png";
+	public static String BTN_GO_DOWN = "btn_go_down_320.png";
+	public static String BTN_ONE_CLOCK = "btn_one_clock_320.png";
+	public static String BTN_ONE_CLOCK_DOWN = "btn_one_clock_down_320.png";
+	public static String BTN_TWO_CLOCKS = "btn_two_clocks_320.png";
+	public static String BTN_TWO_CLOCKS_DOWN = "btn_two_clocks_down_320.png";
+	public static String BTN_PAUSE = "btn_pause_320.png";
+	public static String BTN_PAUSE_DOWN = "btn_pause_down_320.png";
+	public static String BTN_ARR_UP = "btn_up_297.png";
+	public static String BTN_ARR_UP_DOWN = "btn_up_down_297.png";
+	public static String BTN_ARR_DOWN = "btn_down_297.png";
+	public static String BTN_ARR_DOWN_DOWN = "btn_down_down_297.png";
+	public static String BTN_DEV_UP = "btn_dev_320.png";
+	public static String BTN_DEV_DOWN = "btn_dev_down_320.png";
+	public static String BTN_BACK_UP = "btn_back_320.png";
+	public static String BTN_BACK_DOWN = "btn_back_down_320.png";
 	public static String SND_ALARM = "alarm.mp3";
 	
 	private static AssetManager m_am;
 	private static Skin m_skin;
+	private static ArrayList<String> m_bitmapFonts;
+	private static ArrayList<String> m_textures;
+	private static ArrayList<String> m_sounds;
+	
+	static {
+		m_bitmapFonts = new ArrayList<String>();
+		m_bitmapFonts.add(FONT20);
+		m_bitmapFonts.add(FONT30);
+		m_bitmapFonts.add(FONT40);
+		m_bitmapFonts.add(FONT60);
+		
+		m_textures = new ArrayList<String>();
+		m_textures.add(KING);
+		m_textures.add(BTN_GO);
+		m_textures.add(BTN_GO_DOWN);
+		m_textures.add(BTN_ONE_CLOCK);
+		m_textures.add(BTN_ONE_CLOCK_DOWN);
+		m_textures.add(BTN_TWO_CLOCKS);
+		m_textures.add(BTN_TWO_CLOCKS_DOWN);
+		m_textures.add(BTN_PAUSE);
+		m_textures.add(BTN_PAUSE_DOWN);
+		m_textures.add(BTN_ARR_UP);
+		m_textures.add(BTN_ARR_UP_DOWN);
+		m_textures.add(BTN_ARR_DOWN);
+		m_textures.add(BTN_ARR_DOWN_DOWN);
+		m_textures.add(BTN_DEV_UP);
+		m_textures.add(BTN_DEV_DOWN);
+		m_textures.add(BTN_BACK_UP);
+		m_textures.add(BTN_BACK_DOWN);
+		
+		m_sounds = new ArrayList<String>();
+		m_sounds.add(SND_ALARM);
+	}
 	
 	public static void load() {
 		Gdx.app.log("AssetLoader", "load called");
@@ -48,29 +85,36 @@ public class AssetLoader {
 		m_skin = new Skin();
 		m_skin.add("white", new Texture(pixmap));
 		
+		// Load the bitmap fonts
 		m_am = new AssetManager();
-		m_am.load(KING, Texture.class);
-		m_am.load(FONT20, BitmapFont.class);
-		m_am.load(FONT30, BitmapFont.class);
-		m_am.load(FONT40, BitmapFont.class);
-		m_am.load(FONT60, BitmapFont.class);
-		m_am.load(BTN_GO, Texture.class);
-		m_am.load(BTN_GO_DOWN, Texture.class);
-		m_am.load(BTN_ONE_CLOCK, Texture.class);
-		m_am.load(BTN_ONE_CLOCK_DOWN, Texture.class);
-		m_am.load(BTN_TWO_CLOCKS, Texture.class);
-		m_am.load(BTN_TWO_CLOCKS_DOWN, Texture.class);
-		m_am.load(BTN_PAUSE, Texture.class);
-		m_am.load(BTN_PAUSE_DOWN, Texture.class);
-		m_am.load(BTN_ARR_UP, Texture.class);
-		m_am.load(BTN_ARR_UP_DOWN, Texture.class);
-		m_am.load(BTN_ARR_DOWN, Texture.class);
-		m_am.load(BTN_ARR_DOWN_DOWN, Texture.class);
-		m_am.load(BTN_DEV_UP, Texture.class);
-		m_am.load(BTN_DEV_DOWN, Texture.class);
-		m_am.load(BTN_BACK_UP, Texture.class);
-		m_am.load(BTN_BACK_DOWN, Texture.class);
-		m_am.load(SND_ALARM, Sound.class);
+		for (String font_string : m_bitmapFonts) {
+			m_am.load(font_string, BitmapFont.class);
+		}
+		
+		// Load the textures
+		for (String tex_string : m_textures) {
+			m_am.load(tex_string, Texture.class);
+		}
+
+		// Load the sounds
+		for (String sound_string : m_sounds) {
+			m_am.load(sound_string, Sound.class);
+		}
+	}
+	
+	public static void customSettings() {
+		// Set the texture filters
+		Array<Texture> textures = new Array<Texture>();
+		m_am.getAll(Texture.class, textures);
+		for (Texture tex : textures) {
+			tex.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		}
+		
+		// Scale the fonts
+		m_am.get(FONT60, BitmapFont.class).setScale(0.35f);
+		m_am.get(FONT40, BitmapFont.class).setScale(0.37f);
+		m_am.get(FONT30, BitmapFont.class).setScale(0.42f);
+		m_am.get(FONT20, BitmapFont.class).setScale(0.35f);
 	}
 	
 	public static <T> T get(String name, Class<T> type) {

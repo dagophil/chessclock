@@ -19,8 +19,8 @@ public class NumberInput extends Group {
 	
 	public static int LABEL_WIDTH = 70;
 	public static int LABEL_HEIGHT = 60;
-	public static int BUTTON_WIDTH = 34;
-	public static int BUTTON_HEIGHT = 22;
+	public static int BUTTON_WIDTH = 40;
+	public static int BUTTON_HEIGHT = 20;
 	public static int PADDING = 2;
 	public static float LONG_CLICK_TIME = 0.7f;
 	public static float SHORT_CLICK_TIME = 0.1f;

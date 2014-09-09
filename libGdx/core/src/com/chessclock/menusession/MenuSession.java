@@ -116,10 +116,12 @@ public class MenuSession extends Stage {
 		if (ClockPreferences.getTwoClocks()) {
 			m_player1Input.setY(TWO_CLOCKS_Y_PLAYER1);
 			m_player2Input.setY(TWO_CLOCKS_Y_PLAYER2);
+			m_btnTwoClocks.setStyle(m_styleOneClock);
 		} else {
 			m_player1Input.setY(ONE_CLOCK_Y);
 			m_player2Input.setY(ONE_CLOCK_Y);
 			m_player2Input.setVisible(false);
+			m_btnTwoClocks.setStyle(m_styleTwoClocks);
 		}
 		
 		if (fadeIn) {

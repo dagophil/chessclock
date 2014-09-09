@@ -47,6 +47,7 @@ public class ChessclockGame extends Game {
 		if (!m_assetsLoaded && AssetLoader.update()) {
 			Gdx.app.log("ChessclockGame", "assets loaded");
 			m_assetsLoaded = true;
+			AssetLoader.customSettings();
 			SplashScreen splash = (SplashScreen) this.getScreen();
 			splash.fadeOutAndShowMenu();
 		}

@@ -42,10 +42,10 @@ public class AboutSession extends Stage {
 		BitmapFont font = AssetLoader.getFontSmall();
 		LabelStyle labelStyle = new LabelStyle();
 		labelStyle.font = font;
-		m_text = new Label("Idee und\nEntwicklung:\nPhilip Schill\n\nLogo:\nDavid\nBaumgaertel\n\nNerviger\nMitbewohner:\nMichael Ichters", labelStyle);
+		m_text = new Label("Idee und\nEntwicklung:\nPhilip Schill\n\nLogo:\nDavid\nBaumgärtel", labelStyle);
 		m_text.setAlignment(Align.left);
 		m_text.setCenterPosition(this.getWidth()/2, this.getHeight()/2);
-		m_text.setY(this.getHeight() - m_text.getHeight()-16);
+		m_text.setY(this.getHeight() - m_text.getHeight()-36);
 		this.addActor(m_text);
 		
 		// Add the back button
