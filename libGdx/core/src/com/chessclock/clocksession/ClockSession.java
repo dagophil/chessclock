@@ -3,14 +3,17 @@ package com.chessclock.clocksession;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -37,6 +40,7 @@ public class ClockSession extends Stage {
 	private float m_timePlayer1; // seconds
 	private float m_timePlayer2; // seconds
 	private boolean m_isWhitesTurn;
+	private Image m_flashImg;
 	
 	public ClockSession(ChessclockGame game, Viewport viewport, float timePlayer1, float timePlayer2) {
 		super(viewport);
@@ -104,8 +108,7 @@ public class ClockSession extends Stage {
 		ButtonStyle stylePause = new ButtonStyle();
 		stylePause.up = new TextureRegionDrawable(new TextureRegion(AssetLoader.get(AssetLoader.BTN_PAUSE, Texture.class)));
 		m_btnPause = new Button(stylePause);
-		m_btnPause.setWidth(BTN_WIDTH);
-		m_btnPause.setHeight(BTN_HEIGHT);
+		m_btnPause.setSize(BTN_WIDTH, BTN_HEIGHT);
 		m_btnPause.setX((this.getWidth() - BTN_WIDTH) / 2);
 		m_btnPause.setY((this.getHeight() - BTN_HEIGHT) / 2);
 		m_btnPause.addListener(new InputListener() {
@@ -122,10 +125,8 @@ public class ClockSession extends Stage {
 		styleMenu.up = new TextureRegionDrawable(new TextureRegion(AssetLoader.get(AssetLoader.BTN_BACK_UP, Texture.class)));
 		styleMenu.down = new TextureRegionDrawable(new TextureRegion(AssetLoader.get(AssetLoader.BTN_BACK_DOWN, Texture.class)));
 		m_btnMenu = new Button(styleMenu);
-		m_btnMenu.setWidth(BTN_WIDTH);
-		m_btnMenu.setHeight(BTN_HEIGHT);
-		m_btnMenu.setX(15);
-		m_btnMenu.setY(15);
+		m_btnMenu.setSize(BTN_WIDTH, BTN_HEIGHT);
+		m_btnMenu.setPosition(15, 15);
 		m_btnMenu.addListener(new ClickListener() {
 			@Override
 			public void clicked (InputEvent event, float x, float y) {
@@ -155,6 +156,17 @@ public class ClockSession extends Stage {
 		});
 		m_grpResume.addActor(m_btnMenu);
 		this.addActor(m_grpResume);
+		
+		// Create the flash overlay
+		m_flashImg = new Image(AssetLoader.getDrawable(Color.WHITE)) {
+			@Override
+			public Actor hit (float x, float y, boolean touchable) {
+				return null;
+			}
+		};
+		m_flashImg.setSize(this.getWidth(), this.getHeight());
+		m_flashImg.setVisible(false);
+		this.addActor(m_flashImg);
 	}
 	
 	public void goBackToMenu() {
@@ -172,6 +184,18 @@ public class ClockSession extends Stage {
 	
 	public void changePlayers() {
 		m_isWhitesTurn = !m_isWhitesTurn;
+		
+		m_flashImg.setVisible(true);
+		m_flashImg.setColor(1f, 1f, 1f, 1f);
+		AlphaAction fadeOut = new AlphaAction() {
+			@Override
+			protected void end () {
+				m_flashImg.setVisible(false);
+			}
+		};
+		fadeOut.setAlpha(0f);
+		fadeOut.setDuration(0.15f);
+		m_flashImg.addAction(fadeOut);
 	}
 	
 	public void pause() {

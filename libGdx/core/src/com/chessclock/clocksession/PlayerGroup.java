@@ -35,14 +35,12 @@ public class PlayerGroup extends Group {
 
 		// Add the inactive background
 		m_bgInactive = new Image(AssetLoader.getDrawable(colors.bgInactive), Scaling.stretch);
-		m_bgInactive.setWidth(this.getWidth());
-		m_bgInactive.setHeight(this.getHeight());
+		m_bgInactive.setSize(this.getWidth(), this.getHeight());
 		this.addActor(m_bgInactive);
 		
 		// Add the active background
 		m_bgActive = new Image(AssetLoader.getDrawable(colors.bgActive), Scaling.stretch);
-		m_bgActive.setWidth(this.getWidth());
-		m_bgActive.setHeight(this.getHeight());
+		m_bgActive.setSize(this.getWidth(), this.getHeight());
 		this.addActor(m_bgActive);
 		
 		// Create label group
