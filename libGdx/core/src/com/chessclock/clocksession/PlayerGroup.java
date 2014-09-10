@@ -2,8 +2,6 @@ package com.chessclock.clocksession;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
@@ -34,15 +32,6 @@ public class PlayerGroup extends Group {
 		m_isWhite = isWhite;
 		this.setWidth(session.getWidth());
 		this.setHeight(session.getHeight()/2);
-		
-		// Add the click event
-		this.addListener(new InputListener() {
-			@Override
-			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-				clicked();
-				return true;
-			}
-		});
 
 		// Add the inactive background
 		m_bgInactive = new Image(AssetLoader.getDrawable(colors.bgInactive), Scaling.stretch);
@@ -115,13 +104,6 @@ public class PlayerGroup extends Group {
 	
 	public boolean isActive() {
 		return m_isWhite == m_session.isWhitesTurn();
-	}
-	
-	public void clicked() {
-		if (isActive()) {
-			ClockSession session = (ClockSession) this.getStage();
-			session.changePlayers();
-		}
 	}
 	
 	@Override

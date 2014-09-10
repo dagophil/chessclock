@@ -74,12 +74,30 @@ public class ClockSession extends Stage {
 	private void createGroups() {		
 		// Create white button
 		m_grpWhite = new PlayerGroup(this, true, Colorscheme.getWhiteColorscheme());
+		m_grpWhite.addListener(new InputListener() {
+			@Override
+			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+				if (m_grpWhite.isActive()) {
+					changePlayers();
+				}
+				return true;
+			}
+		});
 		this.addActor(m_grpWhite);
 
 		// Create black button
 		m_grpBlack = new PlayerGroup(this, false, Colorscheme.getBlackColorscheme());
 		m_grpBlack.rotateBy(180);
 		m_grpBlack.moveBy(m_grpBlack.getWidth(), 2*m_grpBlack.getHeight());
+		m_grpBlack.addListener(new InputListener() {
+			@Override
+			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+				if (m_grpBlack.isActive()) {
+					changePlayers();
+				}
+				return true;
+			}
+		});
 		this.addActor(m_grpBlack);
 		
 		// Create pause button
@@ -160,12 +178,7 @@ public class ClockSession extends Stage {
 		m_isPaused = true;
 		m_grpResume.setVisible(true);
 		m_grpResume.setColor(1f, 1f, 1f, 0f);
-		AlphaAction fadeInAction = new AlphaAction() {
-			@Override
-			protected void end() {
-
-			}
-		};
+		AlphaAction fadeInAction = new AlphaAction();
 		fadeInAction.setAlpha(1f);
 		fadeInAction.setDuration(0.15f);
 		m_grpResume.addAction(fadeInAction);
