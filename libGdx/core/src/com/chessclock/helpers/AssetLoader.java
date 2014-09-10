@@ -21,10 +21,8 @@ public class AssetLoader {
 	public static final String FONT30 = "fonts/myfont80.fnt";
 	public static final String FONT40 = "fonts/myfont100.fnt";
 	public static final String FONT60 = "fonts/myfont120.fnt";
-	
 	public static final String PENTAGON = "backgrounds/pentagon_cut.png";
 	public static final String CORRIDOR = "backgrounds/corridor_small.jpg";
-	
 	public static final String BTN_GO = "buttons/btn_go_320.png";
 	public static final String BTN_GO_DOWN = "buttons/btn_go_down_320.png";
 	public static final String BTN_ONE_CLOCK = "buttons/btn_one_clock_320.png";
@@ -41,7 +39,6 @@ public class AssetLoader {
 	public static final String BTN_DEV_DOWN = "buttons/btn_dev_down_320.png";
 	public static final String BTN_BACK_UP = "buttons/btn_back_320.png";
 	public static final String BTN_BACK_DOWN = "buttons/btn_back_down_320.png";
-	
 	public static final String SND_ALARM = "sounds/alarm.mp3";
 	
 	private static AssetManager m_am;
