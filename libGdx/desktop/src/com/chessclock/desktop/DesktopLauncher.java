@@ -8,8 +8,8 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "Chessclock";
-		config.width = 240;
-		config.height = 400;
+		config.width = 360;
+		config.height = 600;
 		new LwjglApplication(new ChessclockGame(), config);
 	}
 }
