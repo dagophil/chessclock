@@ -17,28 +17,32 @@ import com.badlogic.gdx.utils.Array;
 
 public class AssetLoader {
 	
-	public static String FONT20 = "fonts/myfont60.fnt";
-	public static String FONT30 = "fonts/myfont80.fnt";
-	public static String FONT40 = "fonts/myfont100.fnt";
-	public static String FONT60 = "fonts/myfont120.fnt";
-	public static String KING = "king.jpg";
-	public static String BTN_GO = "btn_go_320.png";
-	public static String BTN_GO_DOWN = "btn_go_down_320.png";
-	public static String BTN_ONE_CLOCK = "btn_one_clock_320.png";
-	public static String BTN_ONE_CLOCK_DOWN = "btn_one_clock_down_320.png";
-	public static String BTN_TWO_CLOCKS = "btn_two_clocks_320.png";
-	public static String BTN_TWO_CLOCKS_DOWN = "btn_two_clocks_down_320.png";
-	public static String BTN_PAUSE = "btn_pause_320.png";
-	public static String BTN_PAUSE_DOWN = "btn_pause_down_320.png";
-	public static String BTN_ARR_UP = "btn_up_297.png";
-	public static String BTN_ARR_UP_DOWN = "btn_up_down_297.png";
-	public static String BTN_ARR_DOWN = "btn_down_297.png";
-	public static String BTN_ARR_DOWN_DOWN = "btn_down_down_297.png";
-	public static String BTN_DEV_UP = "btn_dev_320.png";
-	public static String BTN_DEV_DOWN = "btn_dev_down_320.png";
-	public static String BTN_BACK_UP = "btn_back_320.png";
-	public static String BTN_BACK_DOWN = "btn_back_down_320.png";
-	public static String SND_ALARM = "alarm.mp3";
+	public static final String FONT20 = "fonts/myfont60.fnt";
+	public static final String FONT30 = "fonts/myfont80.fnt";
+	public static final String FONT40 = "fonts/myfont100.fnt";
+	public static final String FONT60 = "fonts/myfont120.fnt";
+	
+	public static final String PENTAGON = "backgrounds/pentagon_cut.png";
+	public static final String CORRIDOR = "backgrounds/corridor_small.jpg";
+	
+	public static final String BTN_GO = "buttons/btn_go_320.png";
+	public static final String BTN_GO_DOWN = "buttons/btn_go_down_320.png";
+	public static final String BTN_ONE_CLOCK = "buttons/btn_one_clock_320.png";
+	public static final String BTN_ONE_CLOCK_DOWN = "buttons/btn_one_clock_down_320.png";
+	public static final String BTN_TWO_CLOCKS = "buttons/btn_two_clocks_320.png";
+	public static final String BTN_TWO_CLOCKS_DOWN = "buttons/btn_two_clocks_down_320.png";
+	public static final String BTN_PAUSE = "buttons/btn_pause_320.png";
+	public static final String BTN_PAUSE_DOWN = "buttons/btn_pause_down_320.png";
+	public static final String BTN_ARR_UP = "buttons/btn_up_297.png";
+	public static final String BTN_ARR_UP_DOWN = "buttons/btn_up_down_297.png";
+	public static final String BTN_ARR_DOWN = "buttons/btn_down_297.png";
+	public static final String BTN_ARR_DOWN_DOWN = "buttons/btn_down_down_297.png";
+	public static final String BTN_DEV_UP = "buttons/btn_dev_320.png";
+	public static final String BTN_DEV_DOWN = "buttons/btn_dev_down_320.png";
+	public static final String BTN_BACK_UP = "buttons/btn_back_320.png";
+	public static final String BTN_BACK_DOWN = "buttons/btn_back_down_320.png";
+	
+	public static final String SND_ALARM = "sounds/alarm.mp3";
 	
 	private static AssetManager m_am;
 	private static Skin m_skin;
@@ -54,7 +58,8 @@ public class AssetLoader {
 		m_bitmapFonts.add(FONT60);
 		
 		m_textures = new ArrayList<String>();
-		m_textures.add(KING);
+		m_textures.add(CORRIDOR);
+		m_textures.add(PENTAGON);
 		m_textures.add(BTN_GO);
 		m_textures.add(BTN_GO_DOWN);
 		m_textures.add(BTN_ONE_CLOCK);

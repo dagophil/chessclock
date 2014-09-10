@@ -14,7 +14,7 @@ import com.chessclock.ChessclockGame;
 
 public class SplashSession extends Stage {
 
-	public static String ROOK = "loadingscreen.png";
+	public static final String ROOK = "backgrounds/loadingscreen.png";
 	
 	private ChessclockGame m_game;
 	private Image m_bgImage;

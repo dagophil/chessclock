@@ -43,7 +43,7 @@ public class MenuSession extends Stage {
 		m_game = game;
 		
 		// Get the background image
-		m_bgImage = new Image(AssetLoader.get(AssetLoader.KING, Texture.class));
+		m_bgImage = new Image(AssetLoader.get(AssetLoader.PENTAGON, Texture.class));
 		m_bgImage.setWidth(this.getWidth());
 		m_bgImage.setHeight(this.getHeight());
 		this.addActor(m_bgImage);
